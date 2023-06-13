@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.css"
 import ButtonCustom from "../../componentes/button";
+import BotonCarrito from "../../componentes/button";
 import Navbar from "../../componentes/navbar";
 
 
@@ -21,9 +22,11 @@ export const Main = () =>{
             
             <Navbar/>
             <p>Bienvenido a la super tienda onlne </p>     
-            <div><ButtonCustom label={'Registrate'} color={'#B0F1F8'} handleClik={handleClik}/>
+            <div>
+                <ButtonCustom label={'Registrate'} color={'#B0F1F8'} handleClik={handleClik}/>
                 <input style={probando} value={inputValue} onChange={ valuar } />
             </div>
+            <BotonCarrito/>
             </div>
 
 
