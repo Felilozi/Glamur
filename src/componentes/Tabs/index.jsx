@@ -1,67 +1,63 @@
 import React from "react";
+import { Box, Tab, Tabs } from '@mui/material';
+// import Conjuntos from "../contenedor/lista-producto";
+// import { ContadorPage } from "../contador";
+import { useNavigate } from "react-router-dom";
 
-import {Box,Tab,Tabs} from '@mui/material';
-import Conjuntos from "../../pages/main/conjuntos";
+const HomeTabs = ({current,items}) => {
+    // const [selected, setSelected] = React.useState(0);
+    const navigate = useNavigate();
+    const handleChange = (_, newvalue) => {
+        navigate('/productos/' + newvalue);
 
-const HomeTabs = () => {
-    const [selected,setSelected] =React.useState("camisa");
-    const handleChange=(_,value) => {
-        setSelected(value);
-        console.log(selected);
+        
 
     }
 
-    const selectedSections = (value) => {
-        switch (value) {
-            case "conjuntos" :
-                return <Conjuntos/>;
 
-            case "remeras":
-                return <Box>Remera</Box>;
-                
-            case "buzo":
-                return <Box>Buzo</Box>;
+    return (
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Box>
+                <Tabs value={current} onChange={handleChange} aria-label="lab API tabs example">
+                    {
+                        items.map((item,index) => <Tab key={item.id + index} label={item.titulo} value={item.id} />)
+                    }
 
-            case "pantalones" :
-                return <Box>Pantalon</Box>;
-            default :
-                return <Box></Box>;
-        }}
-    
-
-        return (
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Box>
-                <Tabs value={selected} onChange={handleChange} aria-label="lab API tabs example">
+                    {/*---------------- FORMATO VIEJO DEJO PARA LA PRACTICA----------- 
                     <Tab label="conjuntos" value="conjuntos" />
                     <Tab label="Remeras" value="remeras" />
                     <Tab label="Buzo" value="buzo" />
-                    <Tab label="Pantalones" value="pantalones" />
+                    <Tab label="Pantalones" value="pantalones" /> */}
                 </Tabs>
-                </Box>
-                <Box m={3}>
-                {selectedSections(selected)}
-                {/* {
-                    selected === "conjuntos" ? 
-                    <Conjuntos/>
-                    : null
-                }
-                {
-                    selected ==="remeras" ? 
-                    <Box>Remeras</Box>:null
-                }
-                
-                {
-                    selected ==="buzo" ? 
-                    <Box>Buzo</Box>:null
-                }
-                
-                {
-                    selected ==="pantalones" ? 
-                    <Box>Pantalon</Box>:null
-                } */}
-
-                </Box>
             </Box>
-)};
+            <Box m={3}>
+                {/* {selectedSections(selected)} */}
+
+
+            </Box>
+        </Box>
+    )
+};
 export default HomeTabs
+
+    // const selectedSections = (value) => {
+    //     switch (value) {
+    //         case "all":
+    //             return <Conjuntos />;
+
+    //         case "remeras":
+    //             return <ContadorPage />;
+
+    //         case "buzo":
+    //             return <Box>Buzo</Box>;
+
+    //         case "pantalones":
+    //             return <Box>Pantalon</Box>;
+    //         default:
+    //             return <Box></Box>;
+    //     }
+    // }
+
+
+
+    
