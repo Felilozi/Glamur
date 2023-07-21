@@ -1,23 +1,15 @@
 
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
-// import IconButton from '@mui/material/IconButton';
-// import MenuIcon from '@mui/icons-material/Menu';
+import { createTheme, ThemeProvider, Box, Toolbar, Typography } from '@mui/material';
 import CartCompra from "../../componentes/carrito";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import imagen from "./logo.png";
 import { Link } from 'react-router-dom';
-
+import { AppContext } from '../context';
 
 
 const NavBar = () => {
-
-
-
+  const { quantityCart } = React.useContext(AppContext);
 
   return (
     <ThemeProvider theme={theme}>
@@ -34,9 +26,11 @@ const NavBar = () => {
 
             </Typography>
 
-            <CartCompra />
-
-            {/* <Button color="inherit">Login</Button> */}
+            {
+              quantityCart === 0 ? null :
+                <Box>
+                  <CartCompra cartQuantity={quantityCart} />
+                </Box>}
           </Toolbar>
         </AppBar>
       </Box>

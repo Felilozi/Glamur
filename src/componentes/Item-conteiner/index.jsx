@@ -4,35 +4,23 @@ import HomeTabs from '../Tabs'
 import { useNavigate, useParams } from 'react-router-dom'
 import { listProducto } from '../../sdk/productos'
 import { ItemList } from '../item-list'
+import { getFirestore, doc, getDocs, collection, where, query } from 'firebase/firestore';
+
 
 export const CATEGORIA = [
     { id: "all", titulo: "Todo los productos" },
-    { id: "remeras", titulo: "Remeras" },
-    { id: "pantalones", titulo: "Pantalones" },
-    { id: "canguro", titulo: "Buzo" }
+    { id: "Remera", titulo: "Remeras" },
+    { id: "Pantalon", titulo: "Pantalones" },
+    { id: "Buzo", titulo: "Buzo" }
 ]
-const searchCategoria = (id) => {
-    switch (id) {
-        case 'all':
-            return 'remera,pantalones,canguro'
-        case 'remeras':
-            return "remeras"
-        case 'canguro':
-            return "canguro"
-        case 'pantalones':
-            return "pantalones"
-        default:
-            return "telefono"
 
-    }
-}
 
 export const ItemContainer = () => {
     const [items, setItems] = React.useState([]);
-    const[loading,setLoading]=React.useState(false);
-
+    const [loading, setLoading] = React.useState(false);
     const { categoria } = useParams();
     const navigate = useNavigate();
+
     const current = CATEGORIA.some(cat => cat.id === categoria) ? categoria : 'all';
 
 
@@ -44,24 +32,35 @@ export const ItemContainer = () => {
 
     React.useEffect(() => {
         setLoading(true);
-        listProducto(searchCategoria(categoria))
-        
+        const db = getFirestore();
+        const getCollection = collection(db, 'productos')
 
-            .then(res => res.json())
+        // const getProductos  = doc(db,'productos',"3tAxrhPpmtKyX5ZC87ep");
+        if (categoria === "all") {
+            getDocs(getCollection)
+                .then((snapshot) => {
+                    setLoading(false);
+                    setItems(snapshot.docs.map(el => ({ id: el.id, ...el.data() })))
+                    console.log(snapshot.docs.map(el => ({ id: el.id, ...el.data() })))
+                });
 
-            .then(res => {
-                const data = res.results?.map((elemento) => ({
-                    id: elemento.id,
-                    title: elemento.title,
-                    price: elemento.price,
-                    image: elemento.thumbnail,
+        }
 
 
-                }))
-                setItems(data);
-            })
-            .finally(()=> setLoading(false))
-    }, [categoria]);
+        else if (CATEGORIA.some(categorias => categorias.id === categoria)) {
+            const q = query(getCollection, where('category', '==', categoria));
+            getDocs(q)
+
+                .then((snapshot) => {
+                    setLoading(false);
+                    setItems(snapshot.docs.map(el => ({ id: el.id, ...el.data() })))
+                    console.log(snapshot.docs.map(el => ({ id: el.id, ...el.data() })))
+
+                })
+        }
+
+
+    }, [categoria])
 
 
 
@@ -76,3 +75,21 @@ export const ItemContainer = () => {
         </Box>
     )
 }
+
+    // React.useEffect(() => {
+    //     setLoading(true);
+    //     listProducto(searchCategoria(categoria))      
+
+    //         .then(res => res.json())
+
+    //         .then(res => {
+    //             const data = res.results?.map((elemento) => ({
+    //                 id: elemento.id,
+    //                 title: elemento.title,
+    //                 price: elemento.price,
+    //                 image: elemento.thumbnail,     
+    //             }))
+    //             setItems(data);
+    //         })
+    //         .finally(()=> setLoading(false))
+    // }, [categoria])

@@ -1,49 +1,48 @@
 import React from 'react';
-import { idProducto } from '../../sdk/productos';
-
 import { useParams } from 'react-router-dom';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import CardItem from '../card-id';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 
 const DetallesProducto = () => {
-
-    const [item, setItems] = React.useState([]);
+    const [data, setdata] = React.useState();
     const [loading, setLoading] = React.useState(false);
+    const {id} = useParams();
 
-    const { id } = useParams();
 
     React.useEffect(() => {
-        setLoading(true);
-        console.log(id);
-        idProducto(id)
-            .then(res => res.json())
-            .then(res => {
-                setItems(res);
-                console.log(res);
-            })
-            .finally(() => setLoading(false))
-    }, [id]);
+        // setLoading(true);
+        const db = getFirestore();
+        const getProductos = doc(db, 'productos', id);
 
-    if (loading) {
-        return <p>Cargando...</p>;
-    }
+        getDoc(getProductos)
+        .then ((snapshot) => {
+            // console.log({id:snapshot.id,...snapshot.data()});
+            // console.log({id:snapshot.id,...snapshot.data()});
+            setdata({ id:snapshot.id, ...snapshot.data()})
+        });
 
-    if (!item) {
-        return <p>No se encontró el producto.</p>;
-    }
+    },[id]);
 
+    console.log(data);
     return (
+
+
         <Box>
-            {
+                { 
                 Boolean(loading) ?
                     <Typography>cargando....</Typography>
-                    :
-                    <CardItem data={item} />
+                
+            :
+                <CardItem data={data} />
 
-            }
+
+                }
         </Box>
 
-    );
+    )
+
+
 };
 
 export default DetallesProducto;
