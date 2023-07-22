@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box,Typography } from '@mui/material';
 import CardItem from '../card-id';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 

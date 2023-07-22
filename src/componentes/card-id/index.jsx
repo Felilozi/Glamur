@@ -7,16 +7,16 @@ import { AppContext } from '../context';
 
 const CardItem = ({ data }) => {
     // const {title,price,imageURL,stock} = data
-    // const { addProductToCarrito } = React.useContext(AppContext)
-    // const addToCarrito= (quantity) =>{
-    //     addProductToCarrito({
-    //         id:data.id,
-    //         producto:data.title,
-    //         priceForUnit:data.price,
-    //         quantity:quantity,
+    const { addProductToCarrito } = React.useContext(AppContext)
+    const addToCarrito= (quantity) =>{
+        addProductToCarrito({
+            id:data.id,
+            producto:data.title,
+            priceForUnit:data.price,
+            quantity:quantity,
 
-    //     })
-    // }  
+        })
+    }  
     
 
     return (
