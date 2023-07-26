@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import React from 'react'
 import HomeTabs from '../Tabs'
 import { useNavigate, useParams } from 'react-router-dom'
-import { listProducto } from '../../sdk/productos'
+import { listProducto } from '../sdk/productos'
 import { ItemList } from '../item-list'
 import { getFirestore, doc, getDocs, collection, where, query } from 'firebase/firestore';
 

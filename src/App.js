@@ -1,13 +1,13 @@
 // import logo from './logo.svg';
 import './App.css';
-import { ItemContainer } from './componentes/Item-conteiner';
-import CartCompra from './componentes/carrito';
-import DetallesProducto from './componentes/item-id';
-import NavBar from './componentes/navbar';
-import ContexProvider from './componentes/context';
+import { ItemContainer } from './Item-conteiner';
+import CartCompra from './carrito';
+import DetallesProducto from './item-id';
+import NavBar from './navbar';
+import ContexProvider from './context';
 // import Main from './pages/main';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import Cart from './componentes/cart';
+import Cart from './cart';
 
 function App() {
   return (

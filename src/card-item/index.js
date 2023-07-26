@@ -3,10 +3,10 @@ import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@
 import { Link } from 'react-router-dom';
 
 const Item = ({ data }) => {
-    
+    console.log(data);
     return (
 
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{  maxWidth:  345}}>
             <CardMedia
                 component="img"
                 alt={data.title}
@@ -20,7 +20,7 @@ const Item = ({ data }) => {
                     Precio:${data.price}
                     
                 </Typography>
-                
+                {/* {cart ? <Typography variant="body2" color="text.secondary">Cantidad:${data.price}</Typography> : null } */}
             </CardContent>
             <CardActions>
 

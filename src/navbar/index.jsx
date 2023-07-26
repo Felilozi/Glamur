@@ -2,7 +2,7 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import { createTheme, ThemeProvider, Box, Toolbar, Typography } from '@mui/material';
-import CartCompra from "../../componentes/carrito";
+import CartCompra from "../carrito";
 import imagen from "./logo.png";
 import { Link } from 'react-router-dom';
 import { AppContext } from '../context';

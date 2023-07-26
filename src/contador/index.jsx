@@ -1,12 +1,35 @@
 import React from 'react'
 import { Box, Button } from '@mui/material'
-
+import { AppContext } from '../context';
 const MIN_VAlUE = 1;
-export const ContadorPage = ({ stock ,addToCarrito}) => {
+export const ContadorPage = ({data, stock}) => {
+    const { addProductToCarrito } = React.useContext(AppContext)
     const [value, setVAlue] = React.useState(1)
 
+    // const addToCarrito= (quantity) =>{
+    //     addProductToCarrito({
+    //         id:data.id,
+    //         producto:data.title,
+    //         priceForUnit:data.price,
+    //         quantity:quantity,
+
+    //     })
+    // }
+
+
     const handleCarrito=() => {
-        addToCarrito(value)
+        // addToCarrito(addProductToCarrito,value)
+            addProductToCarrito({
+            
+            id:data.id,
+            title:data.title,
+            price:data.price,
+            imageURL:data.imageURL,
+            stock:stock,
+            quantity:value,
+
+        })
+
         setVAlue(1);
     }
     const handlePressMax = () => {
