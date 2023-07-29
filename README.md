@@ -7,6 +7,7 @@ REACT_APP_FIREBASE_STORAGEBUCKET = glamur-2023.appspot.com
 REACT_APP_FIREBASE_MESSAGING_ID = 54591691267
 REACT_APP_FIREBASE_APPID = 1:54591691267:web:628d70e47dae79e2fb0c36 
 REACT_APP_FIREBASE_MEASUREMENTID = G-VWNVVSSGF3
+Debera colocar esto en  index.js para que funcione el firestore
 
 
 ¡Bienvenida al proyecto de React E-Commerce Glamur!
