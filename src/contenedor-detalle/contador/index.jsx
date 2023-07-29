@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Button } from '@mui/material'
+import Swal from 'sweetalert2'
 
 
 
@@ -7,9 +8,17 @@ export const ContadorPage = ({ stock ,addCarrito,decrementStock}) => {
 
     const [value, setVAlue] = React.useState(1)
     const handleCarrito=() => {
+        if (value > stock ){
+            return(
+                Swal.fire({confirmButtonColor: '#f8b7bd',text:'No se puede agregar mas al carrito'})
+            )
+                
+        
+        }
         addCarrito(value);
         setVAlue(1);
         decrementStock(value);
+        
     }
     const handlePressMax = () => {
         if (value < stock) {

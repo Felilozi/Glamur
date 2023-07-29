@@ -19,21 +19,21 @@ const CardItem = ({ data }) => {
     const decrementStock = (quantity) => {
         if (stock - quantity >= 0) {
             setStock((prevStock) => prevStock - quantity);
-            console.log(quantity)
+            
             
         }
     };
 
     return (
         <Card sx={{
-            maxWidth: 800, height: 400, margin: 'auto', marginTop: 2, boxShadow: 3,
+            maxWidth: 800, height: 400, margin: 'auto', marginTop: 3, boxShadow: 3,
             display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
         }} >
             <CardMedia
                 component="img"
                 alt={data.title}
                 image={data.imageURL}
-                sx={{ height: 300, width: 300 }}
+                sx={{ height: 300, width: 300, objectFit:"contain" }}
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div" align="center">

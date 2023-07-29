@@ -1,7 +1,7 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import CartCarrriro from "../cart-carrito/index.jsx";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppContext } from "../../context";
 import UserInfo from "../user-info/index.jsx";
 
@@ -10,8 +10,13 @@ const Cart = () => {
     const { carrito, createNewOrder, lastOrder } = React.useContext(AppContext);
     const [rendeR, setRender] = React.useState();
     const handleRender = () => {
-        setRender(rendeR => rendeR ++ ) 
+        setRender(rendeR => rendeR++)
+
     };
+    const navegacion = useNavigate()
+    const navegacionCompra = () => {
+        navegacion('/productos/all');
+    }
 
 
 
@@ -19,25 +24,32 @@ const Cart = () => {
     return (
         <div>
             {
-            !carrito.length ?
-            <>            
-            <Link to="/">Ir a comprar</Link>
-            <p>No hay elemento del carrito </p>
-            </>
-            :
-            <>            
-                <Box >
-                    {carrito.map((data,index) =>
-                    < CartCarrriro key={data.id} index={index} data={data} handleRender={handleRender} />)  }
-                </Box>
-                <Box>
-                    < UserInfo carrito={carrito} createNewOrder={createNewOrder} lastOrder={lastOrder} />
-                </Box>
-            </>
+                !carrito.length ?
+                    < Box sx={{ textAlign: "center" }}>
+
+                        <Button onClick={navegacionCompra} sx={{
+                            backgroundColor: '#f8b7bd',
+                            color: "black",
+                            margin: "10px 10px"
+                        }} variant="contained" color="primary" >
+                            Ir a comprar
+                        </Button>
+                        <p>No hay elemento del carrito </p>
+                    </Box>
+                    :
+                    <>
+                        <Box >
+                            {carrito.map((data, index) =>
+                                < CartCarrriro key={data.id} index={index} data={data} handleRender={handleRender} rendeR={rendeR} />)}
+                        </Box>
+                        <Box>
+                            < UserInfo carrito={carrito} createNewOrder={createNewOrder} lastOrder={lastOrder} />
+                        </Box>
+                    </>
 
             }
         </div>
-)
+    )
 
-    }
-            export default Cart;
+}
+export default Cart;

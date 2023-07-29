@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Grid, Card, CardContent, CardMedia, Typography, Button } from '@mui/material';
 import { AppContext } from '../../context';
 
 const CartCarrriro = ({ index,data,handleRender}) => {
@@ -37,7 +37,11 @@ const CartCarrriro = ({ index,data,handleRender}) => {
               Total: {data.quantity * data.price}
 
             </Typography>
-            <button onClick={handleEliminar}>Eliminar</button>
+            <Button  onClick={handleEliminar}  style={{
+                        backgroundColor: '#00E7FF',
+                        color: "black",
+
+                    }}>Eliminar</Button>
             
             
           </CardContent>
